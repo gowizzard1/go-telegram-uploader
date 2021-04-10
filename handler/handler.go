@@ -26,7 +26,9 @@ func ProcessFile(path string) {
 		move.MoveFile(conf, path)
 		return
 	}
-	fmt.Println(err)
+	if err.Error() == "the video size is greater than 2GB" {
+		fmt.Println("the video size is greater than 2GB")
+	}
 }
 
 func checkForVideo(path string) (vc tgbotapi.VideoConfig, err error) {
