@@ -1,10 +1,14 @@
 package main
 
 import (
-	"github.com/eloylp/go-telegram-uploader/config"
-	"github.com/eloylp/go-telegram-uploader/watcher"
+	"powergen/go-telegram-uploader/config"
+	"powergen/go-telegram-uploader/watcher"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
-	watcher.Watcher(config.GetConfig().FolderToScan)
+	godotenv.Load()
+	conf := config.BuildConfigs()
+	watcher.Watcher(conf)
 }

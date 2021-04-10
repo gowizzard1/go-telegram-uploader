@@ -1,16 +1,20 @@
 package watcher
 
 import (
-	"github.com/eloylp/go-telegram-uploader/fails"
-	"github.com/eloylp/go-telegram-uploader/handler"
-	"github.com/fsnotify/fsnotify"
 	"log"
+
+	"powergen/go-telegram-uploader/config"
+	"powergen/go-telegram-uploader/fails"
+
+	"powergen/go-telegram-uploader/handler"
+
+	"github.com/fsnotify/fsnotify"
 )
 
-func Watcher(initialPath string) {
+func Watcher(conf config.Configs) {
 	createdWatcher, err := fsnotify.NewWatcher()
 	fails.FailIfError(err)
-	err = createdWatcher.Add(initialPath)
+	err = createdWatcher.Add(conf.FolderToScan)
 	fails.FailIfError(err)
 	startWatcher(createdWatcher, handler.ProcessFile)
 }
@@ -30,7 +34,11 @@ func startWatcher(watcher *fsnotify.Watcher, handler func(string)) {
 			if !ok {
 				return
 			}
-			log.Println("error:", err)
+			if err != nil {
+				log.Println("error:", err)
+				return
+			}
+			//move.MoveFile()
 		}
 	}
 }

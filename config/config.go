@@ -1,36 +1,44 @@
 package config
 
 import (
-	"flag"
 	"os"
-	"sync"
 )
 
-var config *Config
-var once sync.Once
-
-type Config struct {
+type Configs struct {
 	BotToken     string `env:"BOT_TOKEN,required"`
 	ChatId       int64  `env:"CHAT_ID,required"`
 	FolderToScan string `env:"FOLDER_TO_SCAN,required"`
+	FolderToMove string `env:"FOLDER_TO_MOVE"`
 }
 
-func init() {
-	config = &Config{}
+var configs Configs
+
+func SetUp(conf Configs) {
+	configs = conf
 }
 
-func GetConfig() *Config {
-	once.Do(func() {
+func GetConfigs() Configs {
+	return configs
+}
 
-		flag.StringVar(&config.BotToken, "token", "", "The telegram bot token.")
-		flag.Int64Var(&config.ChatId, "chat", 0, "The chat id to dump content")
-		flag.StringVar(&config.FolderToScan, "folder", "", "The folder to keep scanning for media files.")
-		flag.Parse()
+// buildConfigs reads the environment variables and builds the configurations
+func BuildConfigs() Configs {
+	var conf Configs
 
-		if config.BotToken == "" || config.ChatId == 0 || config.FolderToScan == "" {
-			flag.PrintDefaults()
-			os.Exit(1)
-		}
-	})
-	return config
+	conf = Configs{
+		ChatId:       -525034720,
+		FolderToScan: getEnv("FOLDER_TO_SCAN", ""),
+		BotToken:     getEnv("BOT_TOKEN", "key"),
+		FolderToMove: getEnv("FOLDER_TO_MOVE", ""),
+	}
+	SetUp(conf)
+	return conf
+}
+
+// getEnv is a helper function to read an environment variable or return a default value
+func getEnv(key string, defaultVal string) string {
+	if value, exists := os.LookupEnv(key); exists {
+		return value
+	}
+	return defaultVal
 }
