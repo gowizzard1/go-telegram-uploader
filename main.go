@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"os/exec"
 	"powergen/go-telegram-uploader/config"
 	"powergen/go-telegram-uploader/watcher"
 
@@ -11,13 +9,7 @@ import (
 )
 
 func main() {
-	cmd := exec.Command("sh", "-c", "echo stdout; echo 1>&2 stderr")
-	stdoutStderr, err := cmd.CombinedOutput()
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("%s\n", stdoutStderr)
-
+	fmt.Fprintf("haha")
 	godotenv.Load()
 	conf := config.BuildConfigs()
 	watcher.Watcher(conf)
