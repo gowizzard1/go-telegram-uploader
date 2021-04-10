@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	fmt.Fprintf("haha")
+	fmt.Print("haha", "ha")
 	godotenv.Load()
 	conf := config.BuildConfigs()
 	watcher.Watcher(conf)
