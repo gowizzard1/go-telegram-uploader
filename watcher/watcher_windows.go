@@ -20,6 +20,7 @@ func Watcher(conf config.Configs) {
 }
 
 func startWatcher(watcher *fsnotify.Watcher, handler func(string)) {
+
 	for {
 		select {
 		case event, ok := <-watcher.Events:
@@ -38,7 +39,7 @@ func startWatcher(watcher *fsnotify.Watcher, handler func(string)) {
 				log.Println("error:", err)
 				return
 			}
-			//move.MoveFile()
+
 		}
 	}
 }
