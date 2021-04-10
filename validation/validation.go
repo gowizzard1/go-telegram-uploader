@@ -7,6 +7,13 @@ import (
 	"strconv"
 )
 
+const (
+	TB = 1000000000000
+	GB = 1000000000
+	MB = 1000000
+	KB = 1000
+)
+
 func GetVideoInfo(fileName string) os.FileInfo {
 	fileStat, err := os.Stat(fileName)
 	if err != nil {
@@ -14,13 +21,6 @@ func GetVideoInfo(fileName string) os.FileInfo {
 	}
 	return fileStat
 }
-
-const (
-	TB = 1000000000000
-	GB = 1000000000
-	MB = 1000000
-	KB = 1000
-)
 
 func LenReadable(length int, decimals int) (out string) {
 	var unit string
