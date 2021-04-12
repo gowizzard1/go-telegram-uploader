@@ -1,17 +1,16 @@
 package main
 
 import (
-	"fmt"
 	"powergen/go-telegram-uploader/config"
 	"powergen/go-telegram-uploader/watcher"
 
+	"github.com/gookit/color"
 	"github.com/joho/godotenv"
 )
 
 func main() {
 
-	fmt.Println()
-	fmt.Println()
+	color.Info.Tips("starting the go uploader app")
 	godotenv.Load()
 	conf := config.BuildConfigs()
 	watcher.Watcher(conf)
