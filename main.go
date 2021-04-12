@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"powergen/go-telegram-uploader/config"
 	"powergen/go-telegram-uploader/watcher"
 
@@ -10,7 +9,7 @@ import (
 )
 
 func main() {
-	os.Exit(500)
+
 	fmt.Println()
 	fmt.Println()
 	godotenv.Load()
