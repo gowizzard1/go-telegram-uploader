@@ -10,7 +10,7 @@ import (
 
 func main() {
 
-	color.Info.Tips("starting the go uploader app")
+	color.Info.Tips("Telegram video uploader started -- drop or copy to /home directory")
 	godotenv.Load()
 	conf := config.BuildConfigs()
 	watcher.Watcher(conf)

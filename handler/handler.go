@@ -29,7 +29,7 @@ func ProcessFile(path string) {
 		return
 	}
 	if err.Error() == "the video size is greater than 2GB" {
-		color.Warn.Println("the video size is greater than 2GB")
+		color.Error.Println("the video size is greater than 2GB")
 	}
 }
 
@@ -42,8 +42,8 @@ func checkForVideo(path string) (vc tgbotapi.VideoConfig, err error) {
 		//check size
 		info := validation.GetVideoInfo(path)
 		color.Yellow.Println("video size is ", validation.LenReadable(int(info.Size()), 2))
-		fileSize := info.Size() / 250000000
-		if fileSize > 2 {
+		fileSize := float64(info.Size() / 250000000)
+		if fileSize > 2.0 {
 			return vc, errors.New("the video size is greater than 2GB")
 		}
 		//read the file

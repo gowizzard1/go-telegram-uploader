@@ -26,7 +26,7 @@ func BuildConfigs() Configs {
 	var conf Configs
 
 	conf = Configs{
-		ChatId:       -525034720,
+		ChatId:       -1001375076360,
 		FolderToScan: getEnv("FOLDER_TO_SCAN", ""),
 		BotToken:     getEnv("BOT_TOKEN", "key"),
 		FolderToMove: getEnv("FOLDER_TO_MOVE", ""),
