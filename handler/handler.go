@@ -22,10 +22,10 @@ func ProcessFile(path string) {
 	if err == nil {
 		color.Info.Tips("sending video" + filepath.Base(path))
 		bot.SendToBot(videoConfig)
-		color.Green.Println("video " + filepath.Base(path) + " sent")
-		color.Info.Tips("preparing to move sent " + filepath.Base(path) + " to " + conf.FolderToMove)
+		color.Green.Println("video " + move.RemoveLastPart(filepath.Base(path)+" sent"))
+		color.Info.Tips("preparing to move sent " + move.RemoveLastPart(filepath.Base(path)) + " to " + conf.FolderToMove)
 		move.MoveFile(conf, path)
-		color.Green.Println("video " + filepath.Base(path) + " moved")
+		color.Green.Println("video " + move.RemoveLastPart(filepath.Base(path)) + " moved")
 		return
 	}
 	if err.Error() == "the video size is greater than 2GB" {

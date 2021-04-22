@@ -9,13 +9,16 @@ import (
 	"powergen/go-telegram-uploader/handler"
 
 	"github.com/fsnotify/fsnotify"
+	"github.com/gookit/color"
 )
 
 func Watcher(conf config.Configs) {
 	createdWatcher, err := fsnotify.NewWatcher()
 	fails.FailIfError(err)
 	err = createdWatcher.Add(conf.FolderToScan)
-	fails.FailIfError(err)
+	if err != nil {
+		color.Error.Println(err.Error())
+	}
 	startWatcher(createdWatcher, handler.ProcessFile)
 }
 
